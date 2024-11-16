@@ -1,4 +1,4 @@
-// import s from "./LoadMore.module.css";
+import s from "./LoadMore.module.css";
 
 function LoadMore({ setPage }) {
   const handleLoadMore = () => {
@@ -9,7 +9,7 @@ function LoadMore({ setPage }) {
     });
   };
 
-  return <button onClick={handleLoadMore}>Load More</button>;
+  return <button className={s.button} onClick={handleLoadMore}>Load More</button>;
 }
 
 

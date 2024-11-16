@@ -1,0 +1,11 @@
+/* ImageGallery.module.css */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Чотири стовпчики */
+  grid-template-rows: repeat(3, 200px); /* Три рядки фіксованої висоти */
+  gap: 15px; /* Відстань між картинками */
+  padding: 20px;
+  max-width: 80%; /* Обмеження ширини галереї */
+  margin: 0 auto; /* Центрування галереї */
+}
+

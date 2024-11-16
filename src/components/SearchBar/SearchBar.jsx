@@ -1,17 +1,18 @@
-// import s from "./SearchBar.module.css";
+import s from "./SearchBar.module.css";
 
 import { Field, Form, Formik } from "formik";
 
 function SearchBar({ onSubmit }) {
   return (
     <>
-      <header>
+      <header className={s.header}>
         <Formik
           onSubmit={(values) => onSubmit(values.search)}
           initialValues={{ search: "" }}
         >
-          <Form>
+          <Form className={s.search}>
             <Field
+              className={s.field}
               name="search"
               type="text"
               autoComplete="off"
