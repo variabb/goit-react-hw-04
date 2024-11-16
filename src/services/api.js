@@ -9,6 +9,9 @@ export const fetchImages = async (query, page) => {
       per_page: 12,
     },
   });
-  return response.data;
-};
 
+  const totalResults = response.data.total; // Загальна кількість результатів
+  const nbPages = Math.ceil(totalResults / 12); // Кількість сторінок
+
+  return { results: response.data.results, nbPages }; //  зображення та кількість сторінок
+};
