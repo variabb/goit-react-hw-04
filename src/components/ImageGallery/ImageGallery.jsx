@@ -3,6 +3,7 @@
 import ImageCard from "../ImageCard/ImageCard";
 
 function ImageGallery({ images }) {
+ 
   return (
     <>
       <ul>

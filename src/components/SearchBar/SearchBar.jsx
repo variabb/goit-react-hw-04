@@ -6,7 +6,10 @@ function SearchBar({ onSubmit }) {
   return (
     <>
       <header>
-        <Formik onSubmit={onSubmit} initialValues={{ search: "" }}>
+        <Formik
+          onSubmit={(values) => onSubmit(values.search)}
+          initialValues={{ search: "" }}
+        >
           <Form>
             <Field
               name="search"
