@@ -3,6 +3,7 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import SearchBar from "./SearchBar/SearchBar";
 // import axios from "axios";
 import { fetchImages } from "../services/api";
+import Loader from "./Loader/Loader";
 
 console.log("hello");
 
@@ -10,14 +11,28 @@ console.log("hello");
 
 function App() {
   const [images, setImage] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-vars
     const getData = async () => {
-      const response = await fetchImages();
-      setImage(response.hits);
+      try {
+        setIsLoading(false);
+
+        const response = await fetchImages();
+        console.log(response);
+        setImage(response.results);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+        setIsLoading(true);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
     };
+    getData();
   }, []);
+
   const onSubmit = (values) => {
     console.log("Шукаємо:", values.search);
   };
@@ -25,6 +40,8 @@ function App() {
     <div>
       <SearchBar onSubmit={onSubmit} />
       <ImageGallery images={images} />
+      {isLoading && <Loader />}
+      {isError && <h2>Щось сталось! Онови сторінку...</h2>}
     </div>
   );
 }
