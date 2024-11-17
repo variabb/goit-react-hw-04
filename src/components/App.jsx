@@ -3,16 +3,16 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import SearchBar from "./SearchBar/SearchBar";
 import { fetchImages } from "../services/api";
 import Loader from "./Loader/Loader";
-import LoadMore from "./LoadMore/LoadMore";
 import toast from "react-hot-toast";
 import ImageModal from "./ImageModal/ImageModal";
+import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 
 function App() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [nbPages, setNbPages] = useState(0);
-  const [query, setQuery] = useState("nature");
+  const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -24,6 +24,7 @@ function App() {
   }, [nbPages, page]);
 
   useEffect(() => {
+    if (!query) return;
     const getData = async () => {
       try {
         setIsLoading(true);
@@ -75,7 +76,7 @@ function App() {
       <ImageGallery images={images} onImageClick={openModal} />
       {isLoading && <Loader />}
       {isError && <h2>Щось сталось! Онови сторінку...</h2>}
-      {images.length > 0 && nbPages > page && <LoadMore setPage={setPage} />}
+      {images.length > 0 && nbPages > page && <LoadMoreBtn setPage={setPage} />}
       {selectedImage && (
         <ImageModal image={selectedImage} closeModal={closeModal} />
       )}
